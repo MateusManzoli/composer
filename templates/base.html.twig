@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Utilizando Composer</title>
+    </head>
+    <body>
+        <h1>Pagina Inicial</h1>
+        <ul>
+            <li>
+                <a href="/">Pagina Inicial</a>
+                <a href="/?pagina=calculo-imc">Calculo IMC</a>
+                <a href="/?pagina=cadastro-campeonato">Campeonato</a>
+                <a href="/cliente/cadastro.php">Cadastro Cliente</a>
+                <a href="/produto/cadastro.php">Cadastro Produto</a>
+                <a href="/pedido/cadastro.php">Cadastro Pedido</a>
+            </li>
+        </ul>
+        {% block body %}{% endblock %}
+</html>
