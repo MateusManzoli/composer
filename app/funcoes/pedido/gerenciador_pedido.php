@@ -1,7 +1,5 @@
 <?php
 
-include_once '../../config.php';
-
 function PaginaTemplatePedido() {
     require_once '../vendor/autoload.php';
 
@@ -15,10 +13,12 @@ function PaginaTemplatePedido() {
     if (isset($_GET['pagina'])) {
         $pagina = $_GET['pagina'];
     }
-}
 
+    
 $template = $twig->loadTemplate($pagina . '.html.twig');
 echo $template->render([]);
+    }
+
 
 function buscarPedido($id) {
     $buscar = "SELECT * FROM composer.pedido where id = $id";
@@ -37,27 +37,21 @@ function buscarPedidoPorPesquisa($pesquisa) {
     return pesquisar($sql);
 }
 
-function cadastrarPedido($dados) {
-    validarDadosCliente($dados);
-
-    if (verificar($dados['codigo'], $dados['cpf'])) {
-        throw new Exception("Ja possuimos esse pedido em nosso sistema");
-    }
+function cadastrarPedidoCliente($dados) {
     $cadastrar = "
-        INSERT INTO aprendizagem.pedido SET
+        INSERT INTO composer.pedido SET
             cliente_id = '" . addslashes($dados['cliente_id']) . "',
             codigo = '" . addslashes($dados['codigo']) . "',
             status = '" . addslashes($dados['status']) . "'
         ";
-    echo $cadastrar;
     return inserir($cadastrar);
 }
 
-function verificar($codigo) {
+/*function verificar($codigo) {
     $pedido = "select * from composer.pedido where pedido = '{$codigo}'";
     $verificar = pesquisar($pedido);
     return $verificar;
-}
+}*/
 
 function excluirPedido($id) {
     $excluir = "delete from `composer`.`pedido` where id = $id";
@@ -74,7 +68,7 @@ function editarPedido($dados) {
     return editar($editar);
 }
 
-function validarDadosProduto($dados) {
+/*function validarDadosProduto($dados) {
     // empty 'vazio'
     if (empty($dados)) {
         throw new Exception('Os campos precisam ser preenchidos');
@@ -88,4 +82,4 @@ function validarDadosProduto($dados) {
     if (empty($dados['status'])) {
         throw new Exception('O campo status precisa ser preenchido');
     }
-}
+}*/

@@ -3,8 +3,8 @@
 require __DIR__ . '/../../app/config.php';
 include_once '../../app/funcoes/produto/gerenciador_produto.php';
 
-if ($_POST) {
+if (isset($_POST['cadastrar'])) {
     cadastrarProduto($_POST);
 }
-renderTemplate('cadastro_produto');
 
+renderTemplate('cadastro_produto');

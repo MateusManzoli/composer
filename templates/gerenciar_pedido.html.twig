@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <form method="post" action="../pedido/gerenciar.php">
+        <input type="hidden" name="cadastrar" value="1"/>
+        <table class="table table-bordered">
+            <tr style="text-align: center; font-family: monospace; font-size: 20px; color: black;">
+                <td>ID|</td>
+                <td>pedido_id|</td>
+                <td>produto_|</td>
+                <td>quantidade|</td>
+                <td>preco|</td>
+                <td colspan="2">Gerenciar</td>
+            </tr>
+            {% for produto in buscarPedidos %}    
+                <tr style="text-align: center;">
+                    <td>{{produto.id}}</td>
+                    <td>{{produto.id}}</td>
+                    <td>{{produto.id}}</td>
+                    <td>{{produto.id}}</td>
+                    <td>{{produto.id}}</td>
+                    <td><a href="../partida/editar.php?id=<?php echo $gol['id']; ?>" class="btn btn-default navbar-btn">Editar</a></td>
+                    <td><a href="../partida_equipe/cadastrar_partidaEquipe.php?rodada_id=<?= $gol['rodada_id']; ?>&partida_id=<?= $_SESSION['id'] ?>" class="btn btn-default navbar-btn">Gerenciar</a></td>
+                {% endfor %}
+            </tr>
+            <?php } ?>
+        </table>
+    </form>
+{% endblock %}
+

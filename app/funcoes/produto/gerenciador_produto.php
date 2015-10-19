@@ -12,6 +12,12 @@ function buscarProdutos() {
     return $pedidoProdutos;
 }
 
+function BuscarEstoque(){
+    $buscar = "SELECT quantidade_estoque FROM composer.produto ";
+    $buscarEstoque = pesquisar($buscar);
+    return $buscarEstoque;
+}
+
 function buscarProdutoPorPesquisa($pesquisa) {
     $sql = "select * from composer.produto where codigo like '%{$pesquisa}%' or produto like '%{$pesquisa}%'";
     return pesquisar($sql);
@@ -19,11 +25,11 @@ function buscarProdutoPorPesquisa($pesquisa) {
 
 function cadastrarProduto($dados) {
 
-    if (verificar($dados['codigo'])) {
+   /* if (verificar($dados['codigo'])) {
         throw new Exception("Ja possuimos esse produto em nosso sistema");
-    }
+    }*/
     $cadastrar = "
-        INSERT INTO aprendizagem.produto SET
+        INSERT INTO composer.produto SET
             codigo = '" . addslashes($dados['codigo']) . "',
             nome = '" . addslashes($dados['nome']) . "',
             preco = '" . addslashes($dados['preco']) . "',
@@ -32,11 +38,11 @@ function cadastrarProduto($dados) {
     return inserir($cadastrar);
 }
 
-function verificar($codigo) {
+/*function verificar($codigo) {
     $pedido = "select * from composer.produto where pedido = '{$codigo}'";
     $verificar = pesquisar($pedido);
     return $verificar;
-}
+}*/
 
 function excluirProduto($id) {
     $excluir = "delete from `composer`.`produto` where id = $id";

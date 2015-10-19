@@ -1,7 +1,5 @@
 <?php
 
-include_once '../../config.php';
-
 function PaginaTemplatePedidoProduto() {
     require_once '../vendor/autoload.php';
 
@@ -35,12 +33,12 @@ function buscarPedidoPorPesquisa($pesquisa) {
     return pesquisar($sql);
 }
 
-function cadastrarPedido($dados) {
-    validarDadosCliente($dados);
+function cadastrarPedidoProduto($dados) {
+
     
-    if(verificar($dados['codigo'])){
+    /*if(verificar($dados['codigo'])){
         throw new Exception ("Ja possuimos esse produto em nosso sistema");
-    }
+    }*/
     $cadastrar = "
         INSERT INTO  composer.pedido_produto SET 
             pedido_id = '" . addslashes($dados['pedido']) . "',
@@ -51,11 +49,11 @@ function cadastrarPedido($dados) {
     return inserir($cadastrar);
 }
 
-function verificar($codigo) {
+/*function verificar($codigo) {
     $pedido = "select * from composer.pedido_produto where pedido = '{$codigo}'";
     $verificar = pesquisar($pedido);
     return $verificar;
-}
+}*/
 
 function excluirProduto($id) {
     $excluir = "delete from `composer`.`pedido_produto` where id = $id";
@@ -78,18 +76,18 @@ function validarDadosPedidoProduto($dados) {
     if (empty($dados)) {
         throw new Exception('Os campos precisam ser preenchidos');
     }
-    if (empty($dados['codigo'])) {
-        throw new Exception('O campo Codigo precisa ser preenchido');
+    if (empty($dados['pedido_id'])) {
+        throw new Exception('O campo Pedido precisa ser preenchido');
     }
-    if (empty($dados['nome'])) {
-        throw new Exception('O campo Nome precisa ser preenchido');
+    if (empty($dados['produto_id'])) {
+        throw new Exception('O campo Produto precisa ser preenchido');
     }
-    if (empty($dados['preco'])) {
-        throw new Exception('O campo Preco precisa ser preenchido');
+    if (empty($dados['quantidade'])) {
+        throw new Exception('O campo quantidade precisa ser preenchido');
     }
     
-    if (empty($dados['quantidade_estoque'])) {
-        throw new Exception('O campo quantidade precisa ser preenchido');
+    if (empty($dados['preco'])) {
+        throw new Exception('O campo preco precisa ser preenchido');
     }
     
 }

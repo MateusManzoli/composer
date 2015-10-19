@@ -1,7 +1,6 @@
 <?php
-include_once '../../config.php';
 
-function buscarPedido($id) {
+function buscarCliente($id) {
     $buscar = "SELECT * FROM composer.cliente where id = $id";
     $cliente = pesquisar($buscar);
     return $cliente[0];
@@ -19,27 +18,25 @@ function buscarClientePorPesquisa($pesquisa) {
 }
 
 function cadastrarCliente($dados) {
-    validarDadosCliente($dados);
+
     
-    if(verificar($dados['nome'],$dados['cpf'])){
+    /*if(verificar($dados['nome'],$dados['cpf'])){
         throw new Exception ("Cliente encontrado em nosso sistema");
-    }
+    }*/
     $cadastrar = "
-        INSERT INTO aprendizagem.atleta SET
+        INSERT INTO composer.cliente SET
             nome = '" . addslashes($dados['nome']) . "',
             cpf = '" . addslashes($dados['cpf']) . "',
             email = '" . addslashes($dados['email']) . "'
         ";
-    echo $cadastrar;
-    //retorna o metodo inserir que contem os valores da variavel
     return inserir($cadastrar);
 }
 
-function verificar($nome,$cpf) {
+/*function verificar($nome,$cpf) {
     $atleta = "select * from composer.cliente where nome = '{$nome}' && cpf = '{$cpf}'";
     $verificar = pesquisar($atleta);
     return $verificar;
-}
+}*/
 
 function excluirCliente($id) {
     $excluir = "delete from `composer`.`cliente` where id = $id";
@@ -56,7 +53,7 @@ function editarCliente($dados) {
     return editar($editar);
 }
 
-function validarDadosCliente($dados) {
+/*function validarDadosCliente($dados) {
     // empty 'vazio'
     if (empty($dados)) {
         throw new Exception('Os campos precisam ser preenchidos');
@@ -71,3 +68,4 @@ function validarDadosCliente($dados) {
         throw new Exception('O campo email precisa ser preenchido');
     }
 }
+*/
