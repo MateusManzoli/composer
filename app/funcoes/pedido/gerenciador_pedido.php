@@ -14,11 +14,9 @@ function PaginaTemplatePedido() {
         $pagina = $_GET['pagina'];
     }
 
-    
-$template = $twig->loadTemplate($pagina . '.html.twig');
-echo $template->render([]);
-    }
-
+    $template = $twig->loadTemplate($pagina . '.html.twig');
+    echo $template->render([]);
+}
 
 function buscarPedido($id) {
     $buscar = "SELECT * FROM composer.pedido where id = $id";
@@ -27,7 +25,11 @@ function buscarPedido($id) {
 }
 
 function buscarPedidos() {
-    $buscar = "SELECT * FROM composer.pedido";
+    $buscar = "SELECT pd.*, 
+    cl.nome as 'cliente_nome'
+    FROM composer.pedido pd
+    LEFT JOIN composer.cliente cl ON (cl.id = pd.cliente_id)
+";
     $pedidos = pesquisar($buscar);
     return $pedidos;
 }
@@ -40,18 +42,15 @@ function buscarPedidoPorPesquisa($pesquisa) {
 function cadastrarPedidoCliente($dados) {
     $cadastrar = "
         INSERT INTO composer.pedido SET
-            cliente_id = '" . addslashes($dados['cliente_id']) . "',
-            codigo = '" . addslashes($dados['codigo']) . "',
-            status = '" . addslashes($dados['status']) . "'
-        ";
+            cliente_id = '" . addslashes($dados['cliente_id']) . "'";
     return inserir($cadastrar);
 }
 
-/*function verificar($codigo) {
-    $pedido = "select * from composer.pedido where pedido = '{$codigo}'";
-    $verificar = pesquisar($pedido);
-    return $verificar;
-}*/
+/* function verificar($codigo) {
+  $pedido = "select * from composer.pedido where pedido = '{$codigo}'";
+  $verificar = pesquisar($pedido);
+  return $verificar;
+  } */
 
 function excluirPedido($id) {
     $excluir = "delete from `composer`.`pedido` where id = $id";
@@ -61,25 +60,13 @@ function excluirPedido($id) {
 function editarPedido($dados) {
     validarDadosProduto($dados);
     $editar = "UPDATE composer.pedido SET 
-            cliente_id = '" . addslashes($dados['cliente_id']) . "',
-            codigo = '" . addslashes($dados['codigo']) . "',
-            status = '" . addslashes($dados['status']) . "'
+            cliente_id = '" . addslashes($dados['cliente_id']) . "'
             where id = {$dados['id']} ";
     return editar($editar);
 }
 
-/*function validarDadosProduto($dados) {
-    // empty 'vazio'
-    if (empty($dados)) {
-        throw new Exception('Os campos precisam ser preenchidos');
-    }
+function validarDadosProduto($dados) {
     if (empty($dados['cliente_id'])) {
-        throw new Exception('O campo cliente_id precisa ser preenchido');
+        throw new Exception('O campo cliente precisa ser preenchido');
     }
-    if (empty($dados['codigo'])) {
-        throw new Exception('O campo codigo precisa ser preenchido');
-    }
-    if (empty($dados['status'])) {
-        throw new Exception('O campo status precisa ser preenchido');
-    }
-}*/
+}

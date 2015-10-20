@@ -12,6 +12,16 @@ function buscarClientes() {
     return $clientes;
 }
 
+function ClientesPedidos(){
+    $buscar = "SELECT cl.*,
+    pd.id AS 'pedido_id'
+    FROM composer.cliente cl
+    LEFT JOIN composer.pedido pd ON ( pd.cliente_id = cl.id)
+    ";
+    $pedido = pesquisar($buscar);
+    return $pedido;
+}
+
 function buscarClientePorPesquisa($pesquisa) {
     $sql = "select * from composer.cliente where nome like '%{$pesquisa}%' or codigo like '%{$pesquisa}%'";
     return pesquisar($sql);
