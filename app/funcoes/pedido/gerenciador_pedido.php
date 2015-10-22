@@ -19,17 +19,16 @@ function PaginaTemplatePedido() {
 }
 
 function buscarPedido($id) {
-    $buscar = "SELECT * FROM composer.pedido where id = $id";
+    $buscar = "SELECT pd.*, 
+    cl.nome as 'cliente_nome'
+    FROM composer.pedido pd 
+    LEFT JOIN composer.cliente cl ON (cl.id = pd.cliente_id) where pd.id = '{$id}'";
     $pedido = pesquisar($buscar);
-    return $pedido[0];
+    return $pedido;
 }
 
 function buscarPedidos() {
-    $buscar = "SELECT pd.*, 
-    cl.nome as 'cliente_nome'
-    FROM composer.pedido pd
-    LEFT JOIN composer.cliente cl ON (cl.id = pd.cliente_id)
-";
+    $buscar = " SELECT * FROM composer.pedidos";
     $pedidos = pesquisar($buscar);
     return $pedidos;
 }
@@ -59,9 +58,10 @@ function excluirPedido($id) {
 
 function editarPedido($dados) {
     validarDadosProduto($dados);
-    $editar = "UPDATE composer.pedido SET 
+    $editar = "UPDATE `composer`.`pedido` SET 
             cliente_id = '" . addslashes($dados['cliente_id']) . "'
-            where id = {$dados['id']} ";
+            where id = '{$dados['pedido']}' ";
+    echo "$editar";
     return editar($editar);
 }
 

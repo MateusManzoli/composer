@@ -1,28 +1,30 @@
 {% extends "base.html.twig" %}
 {% block body %}
-    
-    <form class="form-horizontal-a" method="post" action="../pedido/editar.php"> 
-        <input type="hidden" name="editar" value="1"/>
+    <form class="form-horizontal-a" method="post" action="../pedido/editar_cliente.php"> 
+        <input type="hidden" name="pedido_id" value="{{pdCliente.id}}"/>
         <h3>Modificar Dados</h3>
         <div class="form-group-a">
-            <label  class="col-sm-2 control-label">Pedido</label>
-            <div class="col-sm-10-a">
-                {% for PedidoCliente in PedidosClientes %}
-                    <input name="cliente_id" type="text" class="form-control" maxlength="20" value="{{PedidoCliente.id}}{{PedidoCliente.nome}}">
-                {% endfor %}
-            </div>
-        </div>
-        <div class="form-group-a">
-            <label  class="col-sm-2 control-label">Cliente</label>
-            <div class="col-sm-10-a">
-                <input name="cliente_id" type="text" class="form-control" maxlength="20" value="{{id}}">
-            </div>
-        </div> 
+            {% for pdCliente in PedidoCliente %}
+                <label  class="col-sm-2 control-label">Pedido</label>              
+                <input name="pedido" type="text" class="form-control" maxlength="11" value="{{pdCliente.id}}" readonly/>
+                <label  class="col-sm-2 control-label">Cliente</label> 
+                <input name="cliente_antigo" type="text" class="form-control" maxlength="80" value="{{pdCliente.cliente_id}}" readonly/><br>
+                <div class="form-group-a">
+                    <label  class="col-sm-2 control-label">Novo Cliente</label>
+                    <div class="col-sm-10-a">
+                        <select name="cliente_id" id="cliente_id" >
+                            {% for cliente in clientes %}    
+                                <option value="{{cliente.id}}">{{cliente.nome}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div> 
+        {% endfor %}
         <div class="form-group-b">
             <div class="col-sm-offset-2 col-sm-10-a">
                 <button type="submit" class="btn btn-default">Alterar</button>
             </div>
         </div>
     </form>
-                
 {% endblock %}

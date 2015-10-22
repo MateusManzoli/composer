@@ -11,8 +11,8 @@
                 <tr style="text-align: center;">
                     <td>{{cliente.pedido_id}}</td>
                     <td>{{cliente.id}}</td>
-                    <td><a href="../pedido/editar_cliente.php?cliente_id = {{cliente.id}}" class="btn btn-default navbar-btn">Editar Cliente</a></td>
-                    <td><a href="../partida_equipe/cadastrar_partidaEquipe.php?rodada_id=<?= $gol['rodada_id']; ?>&partida_id=<?= $_SESSION['id'] ?>" class="btn btn-default navbar-btn">Gerenciar</a></td>
+                    <td><a href="../pedido/editar_cliente.php?pedido_id={{cliente.pedido_id}}" class="btn btn-default navbar-btn">Editar Cliente</a></td>
+                    <td><a href="../partida_equipe/cadastrar_partidaEquipe.php" class="btn btn-default navbar-btn">Gerenciar</a></td>
                 {% endfor %}
             </tr>
             <?php } ?>

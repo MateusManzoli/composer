@@ -9,4 +9,3 @@ $buscarClientes = ClientesPedidos();
 renderTemplate('gerenciar_pedido',array(
     'buscarClientes' => $buscarClientes
 ));
-
