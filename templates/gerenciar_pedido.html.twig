@@ -1,21 +1,21 @@
 {% extends "base.html.twig" %}
 {% block body %}
-    <form method="post" action="../pedido/gerenciar.php">
+    <form method="post" action="../pedido/gerenciador">
         <input type="hidden" name="cadastrar" value="1"/>
+        
         <table class="table table-bordered">
             <tr style="text-align: center; font-family: monospace; font-size: 20px; color: black;">
                 <td>Pedido(ID)</td>
                 <td>Cliente</td>
             </tr>
-            {% for cliente in buscarClientes %}    
+            {% for pedidoCliente in buscarPedidosCliente %}    
                 <tr style="text-align: center;">
-                    <td>{{cliente.pedido_id}}</td>
-                    <td>{{cliente.id}}</td>
-                    <td><a href="../pedido/editar_cliente.php?pedido_id={{cliente.pedido_id}}" class="btn btn-default navbar-btn">Editar Cliente</a></td>
-                    <td><a href="../partida_equipe/cadastrar_partidaEquipe.php" class="btn btn-default navbar-btn">Gerenciar</a></td>
+                    <td>{{pedidoCliente.id}}</td>
+                    <td>{{pedidoCliente.cliente_id}}</td>
+                    <td><a href="../pedido/editar_cliente.php?pedido_id={{pedidoCliente.id}}" class="btn btn-default navbar-btn">Editar Cliente</a></td>
+                    <td><a href="../pedidoProduto/cadastro.php?pedido_id={{pedidoCliente.id}}" class="btn btn-default navbar-btn">Gerenciar</a></td>
                 {% endfor %}
             </tr>
-            <?php } ?>
         </table>
     </form>
 {% endblock %}

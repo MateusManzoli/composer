@@ -33,10 +33,10 @@ function buscarPedidos() {
     return $pedidos;
 }
 
-function buscarPedidoPorPesquisa($pesquisa) {
+/*function buscarPedidoPorPesquisa($pesquisa) {
     $sql = "select * from composer.pedido where codigo like '%{$pesquisa}%' or produto like '%{$pesquisa}%'";
     return pesquisar($sql);
-}
+}*/
 
 function cadastrarPedidoCliente($dados) {
     $cadastrar = "
@@ -45,11 +45,15 @@ function cadastrarPedidoCliente($dados) {
     return inserir($cadastrar);
 }
 
-/* function verificar($codigo) {
-  $pedido = "select * from composer.pedido where pedido = '{$codigo}'";
-  $verificar = pesquisar($pedido);
-  return $verificar;
-  } */
+function PedidosCliente() {
+    $buscar = "SELECT pd.*, 
+    cl.nome as 'cliente_nome'
+    FROM composer.pedido pd
+    LEFT JOIN composer.cliente cl ON (cl.id = pd.cliente_id)
+    ";
+    $pedido = pesquisar($buscar);
+    return $pedido;
+}
 
 function excluirPedido($id) {
     $excluir = "delete from `composer`.`pedido` where id = $id";

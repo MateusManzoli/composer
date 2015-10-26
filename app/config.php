@@ -9,6 +9,13 @@ function pesquisar($sql) {
     $statement = $conexao->query($sql, PDO::FETCH_ASSOC);
     return $statement->fetchAll();
 }
+function pesquisarUnico($sql) {
+    $conexao = conectar();
+    $statement = $conexao->query($sql, PDO::FETCH_ASSOC);
+    $retorno = $statement->fetchAll();
+    return $retorno[0];
+}
+
 function inserir($sql) {
     $conexao = conectar();
     $statement = $conexao->exec($sql);

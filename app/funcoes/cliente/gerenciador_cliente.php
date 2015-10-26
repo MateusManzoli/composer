@@ -12,16 +12,6 @@ function buscarClientes() {
     return $clientes;
 }
 
-function ClientesPedidos(){
-    $buscar = "SELECT cl.*,
-    pd.id AS 'pedido_id'
-    FROM composer.cliente cl
-    LEFT JOIN composer.pedido pd ON ( pd.cliente_id = cl.id)
-    ";
-    $pedido = pesquisar($buscar);
-    return $pedido;
-}
-
 function buscarClientePorPesquisa($pesquisa) {
     $sql = "select * from composer.cliente where nome like '%{$pesquisa}%' or codigo like '%{$pesquisa}%'";
     return pesquisar($sql);
@@ -29,10 +19,10 @@ function buscarClientePorPesquisa($pesquisa) {
 
 function cadastrarCliente($dados) {
 
-    
-    /*if(verificar($dados['nome'],$dados['cpf'])){
-        throw new Exception ("Cliente encontrado em nosso sistema");
-    }*/
+
+    /* if(verificar($dados['nome'],$dados['cpf'])){
+      throw new Exception ("Cliente encontrado em nosso sistema");
+      } */
     $cadastrar = "
         INSERT INTO composer.cliente SET
             nome = '" . addslashes($dados['nome']) . "',
@@ -42,11 +32,11 @@ function cadastrarCliente($dados) {
     return inserir($cadastrar);
 }
 
-/*function verificar($nome,$cpf) {
-    $atleta = "select * from composer.cliente where nome = '{$nome}' && cpf = '{$cpf}'";
-    $verificar = pesquisar($atleta);
-    return $verificar;
-}*/
+/* function verificar($nome,$cpf) {
+  $atleta = "select * from composer.cliente where nome = '{$nome}' && cpf = '{$cpf}'";
+  $verificar = pesquisar($atleta);
+  return $verificar;
+  } */
 
 function excluirCliente($id) {
     $excluir = "delete from `composer`.`cliente` where id = $id";
