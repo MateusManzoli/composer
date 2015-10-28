@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <form method="post" action="../produto/listagem_produtos.php">
+        <input type="hidden" name="cadastrar" value="1"/>
+        <input type="hidden" name="produto" value="{{produto.id}}"/>
+        
+        <table class="table table-bordered">
+            <tr style="text-align: center; font-family: monospace; font-size: 20px; color: black;">
+                <td>Produto(ID)</td>
+                <td>codigo</td>
+                <td>Nome</td>
+                <td>Preco</td>
+                <td>Estoque</td>
+                <td colspan="2">gerenciar</td>
+            </tr>
+            {% for produto in produtos %}    
+                <tr style="text-align: center;">
+                    <td>{{produto.id}}</td>
+                    <td>{{produto.codigo}}</td>
+                    <td>{{produto.nome}}</td>
+                    <td>{{produto.preco}}</td>
+                    <td>{{produto.quantidade_estoque}}</td>
+                    <td><a href="../produto/editar_produto.php?produto_id={{produto.id}}" class="btn btn-default navbar-btn">Editar Produto</a></td>
+                    <td><a href="../produto/receberProdutos.php?produto_id={{produto.id}}" class="btn btn-default navbar-btn">Receber Produtos</a></td>
+                {% endfor %}
+            </tr>
+        </table>
+    </form>
+{% endblock %}

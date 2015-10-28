@@ -48,6 +48,15 @@ function cadastrarPedidoProduto($dados) {
             status = '" . addslashes($dados['status']) . "'";
     return inserir($cadastrar);
 }
+  
+    function DecrementaEstoque($quantidade){  
+        if($estoque < $quantidade){  
+            throw new Exception("Impossivel, quantidade de produto maior do que estoque.");  
+        }else{  
+        $estoque = $estoque - $quantidade;  
+        }   
+    }  
+    
 
 function verificarEstoque($id) {
     $produto = "SELECT nome, quantidade_estoque FROM composer.produto where id = {$id}";

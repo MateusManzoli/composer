@@ -48,21 +48,28 @@ function cadastrarProduto($dados) {
   $pedido = "select * from composer.produto where pedido = '{$codigo}'";
   $verificar = pesquisar($pedido);
   return $verificar;
-  }
- * function editarProduto($dados) {
-  validarDadosPedidoProduto($dados);
+  } */
+
+ function editarProdutoTabela($dados) {
   $editar = "UPDATE composer.produto SET
   codigo = '" . addslashes($dados['codigo']) . "',
   nome = '" . addslashes($dados['nome']) . "',
   preco = '" . addslashes($dados['preco']) . "',
-  quantidade_estoque = '" . addslashes($dados['quantidade']) . "'
   where id = {$dados['id']} ";
   return editar($editar);
-  } */
-
+ }
+ 
+ function ReceberNovosProdutos($dados){
+  $editar = "UPDATE composer.produto SET
+  quantidade_estoque = quantidade_estoque + {$dados['produtosNovos']}
+  where id = {$dados['produto_id']} ";
+  return editar($editar);
+ }
 
 function BuscarStatus() {
     $pedido = "select * from composer.status";
     $buscar = pesquisar($pedido);
     return $buscar;
 }
+
+
