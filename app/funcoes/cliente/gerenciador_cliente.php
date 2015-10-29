@@ -44,7 +44,7 @@ function excluirCliente($id) {
 }
 
 function editarCliente($dados) {
-    validarDadosCliente($dados);
+    //validarDadosCliente($dados);
     $editar = "UPDATE composer.cliente SET 
             nome = '" . addslashes($dados['nome']) . "',
             cpf = '" . addslashes($dados['cpf']) . "',

@@ -12,6 +12,13 @@ function BuscarProdutoPreco($id) {
     return $preco[0];
 }
 
+function zerarEstoque($id) {
+    $editar = "UPDATE composer.produto SET
+    quantidade_estoque = 0
+    where id = $id";
+    return editar($editar);
+}
+
 function buscarProdutos() {
     $buscar = "SELECT * FROM composer.produto";
     $pedidoProdutos = pesquisar($buscar);
@@ -38,8 +45,7 @@ function cadastrarProduto($dados) {
             codigo = '" . addslashes($dados['codigo']) . "',
             nome = '" . addslashes($dados['nome']) . "',
             preco = '" . addslashes($dados['preco']) . "',
-            quantidade_estoque = '" . addslashes($dados['quantidade_estoque']) . "',
-            status = '" . addslashes($dados['status']) . "'
+            quantidade_estoque = '" . addslashes($dados['quantidade_estoque']) . "'
         ";
     return inserir($cadastrar);
 }
@@ -65,7 +71,7 @@ function cadastrarProduto($dados) {
   where id = {$dados['produto_id']} ";
   return editar($editar);
  }
-
+ 
 function BuscarStatus() {
     $pedido = "select * from composer.status";
     $buscar = pesquisar($pedido);

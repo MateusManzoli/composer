@@ -3,6 +3,7 @@
     <form class="form-horizontal-a" method="post" action="../pedidoProduto/cadastro.php">
         {{execute.mensagem}}
         <input type="hidden" name="cadastrar" value="1">
+        <input type="hidden" name="pedido_id" value="{{pdCliente.id}}"
         <h3>Dados do Pedido</h3>
         {% for pdCliente in buscarPedidoCliente %}
             <div class="form-group-a">

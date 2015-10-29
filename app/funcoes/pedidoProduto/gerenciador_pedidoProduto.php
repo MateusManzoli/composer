@@ -21,6 +21,20 @@ function buscarPedidoProduto($id) {
     return $pedidoProduto[0];
 }
 
+function devolverProduto($dados){
+        $editar = "UPDATE composer.produto SET
+        quantidade_estoque = quantidade_estoque + {$dados['quantidade']}
+        where id = {$dados['produto_id']} ";
+    return editar($editar);
+}
+
+function cancelarPedido(){
+    $cancelar = "UPDATE composer.pedidoProduto SET
+    status = 2,
+    quantidade = 0
+    where id = $id";
+    return editar($editar);
+}
 function buscarPedidosProdutos() {
     $buscar = "SELECT * FROM composer.pedido_produto";
     $pedidoProdutos = pesquisar($buscar);
@@ -39,8 +53,8 @@ function cadastrarPedidoProduto($dados) {
     if ($quantidadeEstoque['quantidade_estoque'] < $dados['quantidade']) {
         throw new Exception("A quantidade solicitada {$dados['quantidade']} é maior que {$quantidadeEstoque['quantidade_estoque']} a quantidade disponivel em  estoque para o produto {$quantidadeEstoque['nome']}");
     }
-    $cadastrar = "
-        INSERT INTO  composer.pedido_produto SET 
+
+    $cadastrar = "INSERT INTO  composer.pedido_produto SET 
             pedido_id = '" . addslashes($dados['pedido_id']) . "',
             produto_id = '" . addslashes($dados['produto_id']) . "',
             quantidade = '" . addslashes($dados['quantidade']) . "',
@@ -48,24 +62,10 @@ function cadastrarPedidoProduto($dados) {
             status = '" . addslashes($dados['status']) . "'";
     return inserir($cadastrar);
 }
-  
-    function DecrementaEstoque($quantidade){  
-        if($estoque < $quantidade){  
-            throw new Exception("Impossivel, quantidade de produto maior do que estoque.");  
-        }else{  
-        $estoque = $estoque - $quantidade;  
-        }   
-    }  
-    
 
 function verificarEstoque($id) {
     $produto = "SELECT nome, quantidade_estoque FROM composer.produto where id = {$id}";
     return pesquisarUnico($produto);
-}
-
-function excluirProduto($id) {
-    $excluir = "delete from `composer`.`pedido_produto` where id = $id";
-    return excluir($excluir);
 }
 
 function editarProduto($dados) {
@@ -97,4 +97,11 @@ function validarDadosPedidoProduto($dados) {
     if (empty($dados['preco'])) {
         throw new Exception('O campo preco precisa ser preenchido');
     }
+}
+
+function VenderProdutos($dados) {
+    $editar = "UPDATE composer.produto SET
+  quantidade_estoque = quantidade_estoque - {$dados['quantidade']}
+  where id = {$dados['produto_id']} ";
+    return editar($editar);
 }

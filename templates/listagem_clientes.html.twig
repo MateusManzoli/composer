@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <form method="post" action="../cliente/listagem_clientes.php">
+        <input type="hidden" name="cadastrar" value="1"/>
+        <input type="hidden" name="excluir" value="1"/>
+        <input type="hidden" name="cliente_id" value="{{cliente.id}}"/>
+        
+        <table class="table table-bordered">
+            <tr style="text-align: center; font-family: monospace; font-size: 20px; color: black;">
+                <td>Cliente(ID)</td>
+                <td>Nome</td>
+                <td>Cpf</td>
+                <td>Email</td>
+                <td colspan="2">gerenciar</td>
+            </tr>
+            {% for cliente in clientes %}    
+                <tr style="text-align: center;">
+                    <td>|{{cliente.id}}|</td>
+                    <td>{{cliente.nome}}|</td>
+                    <td>{{cliente.cpf}}|</td>
+                    <td>{{cliente.email}}|</td>
+                    <td><a href="../cliente/editar_cliente.php?cliente_id={{cliente.id}}" class="btn btn-default navbar-btn">Editar Cliente</a></td>
+                   <td><button name="id_cliente" type="submit" class="btn btn-default navbar-btn  glyphicon glyphicon-remove" value="{{cliente.id}}">Excluir</button></td>
+                {% endfor %}
+            </tr>
+        </table>
+    </form>
+{% endblock %}

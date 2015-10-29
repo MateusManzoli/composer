@@ -20,8 +20,10 @@ try {
     ));
     if ($_POST) {
         cadastrarPedidoProduto($_POST);
+        VenderProdutos($_POST);
         $execute["mensagem"] = "Pedido efetuado com êxito";
     }
+    var_dump($_POST);
 } catch (Exception $e) {
     $execute["mensagem"] = $e->getMessage();
 }

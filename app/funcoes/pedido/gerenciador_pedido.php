@@ -55,6 +55,7 @@ function PedidosCliente() {
     return $pedido;
 }
 
+
 function excluirPedido($id) {
     $excluir = "delete from `composer`.`pedido` where id = $id";
     return excluir($excluir);
