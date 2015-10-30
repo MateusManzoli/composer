@@ -6,24 +6,27 @@ require __DIR__ . '/../../app/funcoes/pedido/gerenciador_pedido.php';
 require __DIR__ . '/../../app/funcoes/produto/gerenciador_produto.php';
 
 try {
-    $execute = [];
     $pedidoCliente = array();
     if (!empty($_GET['pedido_id'])) {
         $pedidoCliente = buscarPedido($_GET['pedido_id']);
     }
-    $produtos = buscarProdutos();
-    $status = BuscarStatus();
-    renderTemplate('cadastro_pedidoProduto', array(
-        'buscarPedidoCliente' => $pedidoCliente,
-        'buscarProdutos' => $produtos,
-        'status' => $status
-    ));
+    
     if ($_POST) {
         cadastrarPedidoProduto($_POST);
         VenderProdutos($_POST);
-        $execute["mensagem"] = "Pedido efetuado com êxito";
+        $retorno = "Pedido efetuado com êxito";
     }
-    var_dump($_POST);
-} catch (Exception $e) {
-    $execute["mensagem"] = $e->getMessage();
+    
+    if (!empty($_POST['pedido'])) {
+    finalizarPedido($_POST['pedido_id']);
 }
+
+} catch (Exception $e) {
+    $retorno = $e->getMessage();
+}
+    $produtos = buscarProdutos();
+    renderTemplate('cadastro_pedidoProduto', array(
+        'buscarPedidoCliente' => $pedidoCliente,
+        'buscarProdutos' => $produtos,
+        'mensagem' => $retorno
+));

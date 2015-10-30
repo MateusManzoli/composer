@@ -9,14 +9,10 @@ if (isset($_POST['cadastrar'])) {
     cadastrarPedidoCliente($_POST);
 }
 
-
 $clientes = buscarClientes();
 $status = BuscarStatus();
-$produtos = buscarProdutos();
-$estoque = BuscarEstoque();
-
 renderTemplate('cadastro_pedido',array(
-    'status_pedido' => $status,
+    'status' => $status,
     'clientes' => $clientes,
-    'produtos' => $produtos
+
 ));

@@ -33,28 +33,27 @@ function buscarPedidos() {
     return $pedidos;
 }
 
-/*function buscarPedidoPorPesquisa($pesquisa) {
-    $sql = "select * from composer.pedido where codigo like '%{$pesquisa}%' or produto like '%{$pesquisa}%'";
-    return pesquisar($sql);
-}*/
+/* function buscarPedidoPorPesquisa($pesquisa) {
+  $sql = "select * from composer.pedido where codigo like '%{$pesquisa}%' or produto like '%{$pesquisa}%'";
+  return pesquisar($sql);
+  } */
 
 function cadastrarPedidoCliente($dados) {
     $cadastrar = "
         INSERT INTO composer.pedido SET
-            cliente_id = '" . addslashes($dados['cliente_id']) . "'";
+        cliente_id = '" . addslashes($dados['cliente_id']) . "'";
     return inserir($cadastrar);
 }
 
 function PedidosCliente() {
     $buscar = "SELECT pd.*, 
     cl.nome as 'cliente_nome'
-    FROM composer.pedido pd
-    LEFT JOIN composer.cliente cl ON (cl.id = pd.cliente_id)
+    FROM composer.pedido pd 
+    LEFT JOIN composer.cliente cl ON (cl.id = pd.cliente_id) order by pd.id
     ";
     $pedido = pesquisar($buscar);
     return $pedido;
 }
-
 
 function excluirPedido($id) {
     $excluir = "delete from `composer`.`pedido` where id = $id";
@@ -74,4 +73,32 @@ function validarDadosProduto($dados) {
     if (empty($dados['cliente_id'])) {
         throw new Exception('O campo cliente precisa ser preenchido');
     }
+}
+
+/* function cancelarPedido(){
+  $alterar = alteraStatus($id);
+  $produto = produtoPedido($id);
+  $devolucao = devolverProduto($dados);
+  }*/
+
+
+function alteraStatus($id) {
+    $altera = "UPDATE composer.pedido SET
+    status = 3,
+    where id =$id";
+    echo $altera;
+    return editar($altera);
+}
+
+function produtoPedido($pedido_id) {
+    $buscar = "SELECT * FROM composer.pedido_produto where pedido_id = $pedido_id";
+    $pedido = pesquisar($buscar);
+    return $pedido;
+}
+
+function devolverProduto($dados) {
+    $editar = "UPDATE composer.produto SET
+    quantidade_estoque = quantidade_estoque + {$dados['quantidade']};
+    where id = {$dados['produto_id']} ";
+    return editar($editar);
 }

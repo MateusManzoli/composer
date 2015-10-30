@@ -21,20 +21,15 @@ function buscarPedidoProduto($id) {
     return $pedidoProduto[0];
 }
 
-function devolverProduto($dados){
-        $editar = "UPDATE composer.produto SET
-        quantidade_estoque = quantidade_estoque + {$dados['quantidade']}
-        where id = {$dados['produto_id']} ";
-    return editar($editar);
+function finalizarPedido($id) {
+    $finalizar = "UPDATE composer.pedido SET
+    status = 2
+    where id = $id ";
+    echo $finalizar;
+    return editar($finalizar);
 }
 
-function cancelarPedido(){
-    $cancelar = "UPDATE composer.pedidoProduto SET
-    status = 2,
-    quantidade = 0
-    where id = $id";
-    return editar($editar);
-}
+
 function buscarPedidosProdutos() {
     $buscar = "SELECT * FROM composer.pedido_produto";
     $pedidoProdutos = pesquisar($buscar);
@@ -53,13 +48,11 @@ function cadastrarPedidoProduto($dados) {
     if ($quantidadeEstoque['quantidade_estoque'] < $dados['quantidade']) {
         throw new Exception("A quantidade solicitada {$dados['quantidade']} é maior que {$quantidadeEstoque['quantidade_estoque']} a quantidade disponivel em  estoque para o produto {$quantidadeEstoque['nome']}");
     }
-
     $cadastrar = "INSERT INTO  composer.pedido_produto SET 
             pedido_id = '" . addslashes($dados['pedido_id']) . "',
             produto_id = '" . addslashes($dados['produto_id']) . "',
             quantidade = '" . addslashes($dados['quantidade']) . "',
-            preco = '" . addslashes($dados['preco']) . "',
-            status = '" . addslashes($dados['status']) . "'";
+            preco = '" . addslashes($dados['preco']) . "'";
     return inserir($cadastrar);
 }
 
