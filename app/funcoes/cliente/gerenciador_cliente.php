@@ -18,11 +18,10 @@ function buscarClientePorPesquisa($pesquisa) {
 }
 
 function cadastrarCliente($dados) {
-
-
-    /* if(verificar($dados['nome'],$dados['cpf'])){
-      throw new Exception ("Cliente encontrado em nosso sistema");
-      } */
+validarDadosCliente($dados);
+    if (verificar($dados['cpf'])) {
+        throw new Exception("O cliente ja se encontra cadastrado em nosso sistema!");
+    }
     $cadastrar = "
         INSERT INTO composer.cliente SET
             nome = '" . addslashes($dados['nome']) . "',
@@ -32,11 +31,11 @@ function cadastrarCliente($dados) {
     return inserir($cadastrar);
 }
 
-/* function verificar($nome,$cpf) {
-  $atleta = "select * from composer.cliente where nome = '{$nome}' && cpf = '{$cpf}'";
-  $verificar = pesquisar($atleta);
-  return $verificar;
-  } */
+function verificar($cpf) {
+    $cliente = "select * from composer.cliente where cpf = '{$cpf}'";
+    $verificar = pesquisar($cliente);
+    return $verificar;
+}
 
 function excluirCliente($id) {
     $excluir = "delete from `composer`.`cliente` where id = $id";
@@ -44,7 +43,7 @@ function excluirCliente($id) {
 }
 
 function editarCliente($dados) {
-    //validarDadosCliente($dados);
+    validarDadosCliente($dados);
     $editar = "UPDATE composer.cliente SET 
             nome = '" . addslashes($dados['nome']) . "',
             cpf = '" . addslashes($dados['cpf']) . "',
@@ -53,11 +52,8 @@ function editarCliente($dados) {
     return editar($editar);
 }
 
-/*function validarDadosCliente($dados) {
+function validarDadosCliente($dados) {
     // empty 'vazio'
-    if (empty($dados)) {
-        throw new Exception('Os campos precisam ser preenchidos');
-    }
     if (empty($dados['nome'])) {
         throw new Exception('O campo nome precisa ser preenchido');
     }
@@ -68,4 +64,3 @@ function editarCliente($dados) {
         throw new Exception('O campo email precisa ser preenchido');
     }
 }
-*/

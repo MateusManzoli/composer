@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 {% block body %}
-    <form class="form-horizontal-a" method="post" action="../pedido/editar_cliente.php"> 
+    <form class="form-horizontal-a" method="post" action="../pedido/editar_clientePedido.php"> 
+        {{mensagem}}
         <input type="hidden" name="pedido_id" value="{{pdCliente.id}}"/>
         <h3>Modificar Dados</h3>
         <div class="form-group-a">

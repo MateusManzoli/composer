@@ -6,7 +6,10 @@ require __DIR__ . '/../../app/funcoes/pedido/gerenciador_pedido.php';
 require __DIR__ . '/../../app/funcoes/produto/gerenciador_produto.php';
 
 try {
+  
     $pedidoCliente = array();
+    $retorno = "";
+    
     if (!empty($_GET['pedido_id'])) {
         $pedidoCliente = buscarPedido($_GET['pedido_id']);
     }
@@ -24,6 +27,7 @@ try {
 } catch (Exception $e) {
     $retorno = $e->getMessage();
 }
+
     $produtos = buscarProdutos();
     renderTemplate('cadastro_pedidoProduto', array(
         'buscarPedidoCliente' => $pedidoCliente,

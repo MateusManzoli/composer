@@ -37,9 +37,9 @@ function buscarProdutoPorPesquisa($pesquisa) {
 }
 
 function cadastrarProduto($dados) {
-    /* if (verificar($dados['codigo'])) {
-      throw new Exception("Ja possuimos esse produto em nosso sistema");
-      } */
+    if (verificar($dados['codigo'])) {
+        throw new Exception("Ja possuimos esse produto em nosso sistema");
+    }
     $cadastrar = "
         INSERT INTO composer.produto SET
             codigo = '" . addslashes($dados['codigo']) . "',
@@ -50,32 +50,31 @@ function cadastrarProduto($dados) {
     return inserir($cadastrar);
 }
 
-/* function verificar($codigo) {
-  $pedido = "select * from composer.produto where pedido = '{$codigo}'";
-  $verificar = pesquisar($pedido);
-  return $verificar;
-  } */
+function verificar($codigo) {
+    $pedido = "select * from composer.produto where pedido = '{$codigo}'";
+    $verificar = pesquisar($pedido);
+    return $verificar;
+}
 
- function editarProdutoTabela($dados) {
-  $editar = "UPDATE composer.produto SET
+function editarProdutoTabela($dados) {
+    $editar = "UPDATE composer.produto SET
   codigo = '" . addslashes($dados['codigo']) . "',
   nome = '" . addslashes($dados['nome']) . "',
   preco = '" . addslashes($dados['preco']) . "',
-  where id = {$dados['id']} ";
-  return editar($editar);
- }
- 
- function ReceberNovosProdutos($dados){
-  $editar = "UPDATE composer.produto SET
+  where id = {$dados['produto_id']} ";
+  echo $editar;
+    return editar($editar);
+}
+
+function ReceberNovosProdutos($dados) {
+    $editar = "UPDATE composer.produto SET
   quantidade_estoque = quantidade_estoque + {$dados['produtosNovos']}
   where id = {$dados['produto_id']} ";
-  return editar($editar);
- }
- 
+    return editar($editar);
+}
+
 function BuscarStatus() {
     $pedido = "select * from composer.status";
     $buscar = pesquisar($pedido);
     return $buscar;
 }
-
-

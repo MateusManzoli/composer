@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 {% block body %}
-    
+
     <form class="form-horizontal-a" method="post" action="../produto/cadastro.php">
         <input type="hidden" name="cadastrar" value="1">
         <h3>Dados do Produto</h3>
@@ -13,7 +13,7 @@
         <div class="form-group-a">
             <label  class="col-sm-2 control-label">Nome</label>
             <div class="col-sm-10-a">
-                <input name="nome" type="text" class="form-control" maxlength="60" placeholder="Nome do Produto">
+                <input name="nome" type="text" class="form-control" maxlength="100" placeholder="Nome do Produto">
             </div>
         </div>
         <div class="form-group-a">
@@ -30,9 +30,9 @@
         </div>
         <div class="form-group-b">
             <div class="col-sm-offset-2 col-sm-10-a">
-                <button name='cadastro_produto' type="submit" class="btn btn-default">Cadastrar Produto</button>
+                <button  type="submit" class="btn btn-default">Cadastrar Produto</button>
             </div>
         </div>
     </form>
-                    
+
 {% endblock %}

@@ -1,10 +1,10 @@
 {% extends "base.html.twig" %}
 {% block body %}
     <form method="post" action="../cliente/listagem_clientes.php">
+        {{mensagem}}
         <input type="hidden" name="cadastrar" value="1"/>
         <input type="hidden" name="excluir" value="1"/>
-        <input type="hidden" name="cliente_id" value="{{cliente.id}}"/>
-        
+        <input type="hidden" name="cliente_id" value="{{cliente.id}}"/>     
         <table class="table table-bordered">
             <tr style="text-align: center; font-family: monospace; font-size: 20px; color: black;">
                 <td>Cliente(ID)</td>

@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 {% block body %}
     <form class="form-horizontal-a" method="post" action="../pedido/cadastro.php">
+        {{mensagem}}<br>
         <input type="hidden" name="cadastrar" value="1">
         <h3>Dados do Pedido</h3>
         <div class="form-group-a">

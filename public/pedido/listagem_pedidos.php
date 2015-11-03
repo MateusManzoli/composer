@@ -3,9 +3,9 @@
 require __DIR__ . '/../../app/config.php';
 include_once '../../app/funcoes/pedido/gerenciador_pedido.php';
 
-if (!empty($_POST['cancelar'])) {
-    alteraStatus($_POST['id_compra']);
-    devolverProduto('produto_id');
+
+if (!empty($_REQUEST['pedido_id'])) {
+   $var = cancelarPedido('pedido_id');
 }
 
 $pedidosCliente = PedidosCliente();

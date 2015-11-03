@@ -2,8 +2,8 @@
 {% block body %}
     <form method="post" action="../pedido/gerenciador">
         <input type="hidden" name="cancelar" value="1"/>
-        <input type="hidden" name="cadastrar" value="1"/>
-
+        <input type="hidden" name="pedido_id" value="{{pedidoCliente.id}}"/>
+        
         <table class="table table-bordered">
             <tr style="text-align: center; font-family: monospace; font-size: 20px; color: black;">
                 <td>Pedido(ID)</td>
@@ -16,10 +16,10 @@
                     <td>{{pedidoCliente.id}}</td>
                     <td>{{pedidoCliente.cliente_id}}</td>
                     <td>{{pedidoCliente.status}}</td>
-                    <td><a href="../pedido/editar_cliente.php?pedido_id={{pedidoCliente.id}}" class="btn btn-default navbar-btn">Editar Cliente</a></td>
+                    <td><a href="../pedido/editar_clientePedido.php?pedido_id={{pedidoCliente.id}}" class="btn btn-default navbar-btn">Editar Cliente</a></td>
                     <td><a href="../pedidoProduto/cadastro.php?pedido_id={{pedidoCliente.id}}" class="btn btn-default navbar-btn">Gerenciar</a></td>
-                    <td><button name="id_compra" type="submit" class="btn btn-default navbar-btn  glyphicon glyphicon-remove" value="{{pedido.id}}">Cancelar</button></td>
-                {% endfor %}
+                    <td><a href="../pedido/listagem_pedidos.php?pedido_id={{pedidoCliente.id}}" class="btn btn-default navbar-btn">Cancelar</a></td>
+                 {% endfor %}
             </tr>
         </table>
     </form>

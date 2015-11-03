@@ -1,23 +1,5 @@
 <?php
 
-function PaginaTemplatePedido() {
-    require_once '../vendor/autoload.php';
-
-    Twig_Autoloader::register();
-    $loader = new Twig_Loader_Filesystem(__DIR__ . '/../templates/pedido/');
-
-    $twig = new Twig_Environment($loader);
-
-    $pagina = 'index';
-
-    if (isset($_GET['pagina'])) {
-        $pagina = $_GET['pagina'];
-    }
-
-    $template = $twig->loadTemplate($pagina . '.html.twig');
-    echo $template->render([]);
-}
-
 function buscarPedido($id) {
     $buscar = "SELECT pd.*, 
     cl.nome as 'cliente_nome'
@@ -33,17 +15,18 @@ function buscarPedidos() {
     return $pedidos;
 }
 
-/* function buscarPedidoPorPesquisa($pesquisa) {
-  $sql = "select * from composer.pedido where codigo like '%{$pesquisa}%' or produto like '%{$pesquisa}%'";
-  return pesquisar($sql);
-  } */
-
-function cadastrarPedidoCliente($dados) {
+function cadastrarPedidoCliente($dados){
     $cadastrar = "
         INSERT INTO composer.pedido SET
         cliente_id = '" . addslashes($dados['cliente_id']) . "'";
     return inserir($cadastrar);
 }
+
+/*function verificar($id) {
+    $cliente = "select * from composer.cliente where id = '{$id}'";
+    $verificar = pesquisar($cliente);
+    return $verificar;
+}*/
 
 function PedidosCliente() {
     $buscar = "SELECT pd.*, 
@@ -61,11 +44,10 @@ function excluirPedido($id) {
 }
 
 function editarPedido($dados) {
-    validarDadosProduto($dados);
+    //validarDadosProduto($dados);
     $editar = "UPDATE `composer`.`pedido` SET 
             cliente_id = '" . addslashes($dados['cliente_id']) . "'
             where id = '{$dados['pedido']}' ";
-    echo "$editar";
     return editar($editar);
 }
 
@@ -74,13 +56,6 @@ function validarDadosProduto($dados) {
         throw new Exception('O campo cliente precisa ser preenchido');
     }
 }
-
-/* function cancelarPedido(){
-  $alterar = alteraStatus($id);
-  $produto = produtoPedido($id);
-  $devolucao = devolverProduto($dados);
-  }*/
-
 
 function alteraStatus($id) {
     $altera = "UPDATE composer.pedido SET
@@ -102,3 +77,27 @@ function devolverProduto($dados) {
     where id = {$dados['produto_id']} ";
     return editar($editar);
 }
+
+function cancelarPedido($id) {
+
+    $statusPedidoCancelado = 3;
+
+    $pedido = buscarPedido($id);
+
+    $produtosPedido = produtoPedido($pedido["pedido_id"]);
+    print_r($produtosPedido);
+}
+
+/*
+function validarDadosCliente($dados) {
+
+    if (empty($dados['nome'])) {
+        throw new Exception('O campo nome precisa ser preenchido');
+    }
+    if (empty($dados['cpf'])) {
+        throw new Exception('O campo cpf precisa ser preenchido');
+    }
+    if (empty($dados['email'])) {
+        throw new Exception('O campo email precisa ser preenchido');
+    }
+}*/
