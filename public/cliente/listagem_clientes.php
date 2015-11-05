@@ -7,6 +7,7 @@ try {
     $retorno = "";
     if (!empty($_POST['excluir'])) {
         excluirCliente($_POST['id_cliente']);
+        
         $retorno = "Cliente excluido com êxito! ";
     }
 } catch (Exception $e) {

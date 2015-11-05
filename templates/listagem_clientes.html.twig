@@ -11,7 +11,7 @@
                 <td>Nome</td>
                 <td>Cpf</td>
                 <td>Email</td>
-                <td colspan="2">gerenciar</td>
+                <td>Gerenciar</td>
             </tr>
             {% for cliente in clientes %}    
                 <tr style="text-align: center;">
@@ -20,7 +20,6 @@
                     <td>{{cliente.cpf}}|</td>
                     <td>{{cliente.email}}|</td>
                     <td><a href="../cliente/editar_cliente.php?cliente_id={{cliente.id}}" class="btn btn-default navbar-btn">Editar Cliente</a></td>
-                   <td><button name="id_cliente" type="submit" class="btn btn-default navbar-btn  glyphicon glyphicon-remove" value="{{cliente.id}}">Excluir</button></td>
                 {% endfor %}
             </tr>
         </table>

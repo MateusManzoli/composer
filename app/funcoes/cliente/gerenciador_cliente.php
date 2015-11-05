@@ -37,11 +37,6 @@ function verificar($cpf) {
     return $verificar;
 }
 
-function excluirCliente($id) {
-    $excluir = "delete from `composer`.`cliente` where id = $id";
-    return excluir($excluir);
-}
-
 function editarCliente($dados) {
     validarDadosCliente($dados);
     $editar = "UPDATE composer.cliente SET 
