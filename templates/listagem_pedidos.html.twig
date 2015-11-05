@@ -1,9 +1,7 @@
 {% extends "base.html.twig" %}
 {% block body %}
-    <form method="post" action="../pedido/gerenciador">
+    <form method="post" action="../pedido/listagem_pedidos.php">
         <input type="hidden" name="cancelar" value="1"/>
-        <input type="hidden" name="pedido_id" value="{{pedidoCliente.id}}"/>
-        
         <table class="table table-bordered">
             <tr style="text-align: center; font-family: monospace; font-size: 20px; color: black;">
                 <td>Pedido(ID)</td>
@@ -18,8 +16,9 @@
                     <td>{{pedidoCliente.status}}</td>
                     <td><a href="../pedido/editar_clientePedido.php?pedido_id={{pedidoCliente.id}}" class="btn btn-default navbar-btn">Editar Cliente</a></td>
                     <td><a href="../pedidoProduto/cadastro.php?pedido_id={{pedidoCliente.id}}" class="btn btn-default navbar-btn">Gerenciar</a></td>
-                    <td><a href="../pedido/listagem_pedidos.php?pedido_id={{pedidoCliente.id}}" class="btn btn-default navbar-btn">Cancelar</a></td>
-                 {% endfor %}
+                    <!--<td><a href="../pedido/listagem_pedidos.php?pedido_id={{pedidoCliente.id}}" class="btn btn-default navbar-btn">Cancelar</a></td>-->
+                    <td><button name="id_pedido" type="submit" class="btn btn-default navbar-btn  glyphicon glyphicon-remove" value="{{pedidoCliente.id}}">Cancelar</button></td> 
+                {% endfor %}
             </tr>
         </table>
     </form>

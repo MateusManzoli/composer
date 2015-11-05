@@ -17,7 +17,7 @@ try {
     if ($_POST) {
         cadastrarPedidoProduto($_POST);
         VenderProdutos($_POST);
-        $retorno = "Pedido efetuado com êxito";
+        $retorno = "Compra realizada com êxito";
     }
     
     if (!empty($_POST['pedido'])) {

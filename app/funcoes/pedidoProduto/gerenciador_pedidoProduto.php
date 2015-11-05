@@ -25,13 +25,12 @@ function finalizarPedido($id) {
     $finalizar = "UPDATE composer.pedido SET
     status = 2
     where id = $id ";
-    echo $finalizar;
     return editar($finalizar);
 }
 
 
 function buscarPedidosProdutos() {
-    $buscar = "SELECT * FROM composer.pedido_produto";
+    $buscar = "SELECT * FROM composer.pedido_produto order by pedido_id";
     $pedidoProdutos = pesquisar($buscar);
     return $pedidoProdutos;
 }

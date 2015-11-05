@@ -37,8 +37,8 @@ function buscarProdutoPorPesquisa($pesquisa) {
 }
 
 function cadastrarProduto($dados) {
-    if (verificar($dados['codigo'])) {
-        throw new Exception("Ja possuimos esse produto em nosso sistema");
+    if (verificarProduto($dados['codigo'])) {
+        throw new Exception("Ja possuimos algum produto com esse codigo em nosso sistema");
     }
     $cadastrar = "
         INSERT INTO composer.produto SET
@@ -50,19 +50,19 @@ function cadastrarProduto($dados) {
     return inserir($cadastrar);
 }
 
-function verificar($codigo) {
-    $pedido = "select * from composer.produto where pedido = '{$codigo}'";
-    $verificar = pesquisar($pedido);
+function verificarProduto($codigo) {
+    $produto = "select * from composer.produto where codigo = '{$codigo}'";
+    $verificar = pesquisar($produto);
     return $verificar;
 }
 
 function editarProdutoTabela($dados) {
+
     $editar = "UPDATE composer.produto SET
   codigo = '" . addslashes($dados['codigo']) . "',
   nome = '" . addslashes($dados['nome']) . "',
-  preco = '" . addslashes($dados['preco']) . "',
+  preco = '" . addslashes($dados['preco']) . "'
   where id = {$dados['produto_id']} ";
-  echo $editar;
     return editar($editar);
 }
 

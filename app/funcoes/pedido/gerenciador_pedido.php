@@ -15,18 +15,19 @@ function buscarPedidos() {
     return $pedidos;
 }
 
-function cadastrarPedidoCliente($dados){
+function cadastrarPedidoCliente($dados) {
     $cadastrar = "
         INSERT INTO composer.pedido SET
-        cliente_id = '" . addslashes($dados['cliente_id']) . "'";
+        cliente_id = '" . addslashes($dados['cliente_id']) . "',
+        status = '" . addslashes($dados['status']) . "'";
     return inserir($cadastrar);
 }
 
-/*function verificar($id) {
-    $cliente = "select * from composer.cliente where id = '{$id}'";
-    $verificar = pesquisar($cliente);
-    return $verificar;
-}*/
+/* function verificar($id) {
+  $cliente = "select * from composer.cliente where id = '{$id}'";
+  $verificar = pesquisar($cliente);
+  return $verificar;
+  } */
 
 function PedidosCliente() {
     $buscar = "SELECT pd.*, 
@@ -59,8 +60,8 @@ function validarDadosProduto($dados) {
 
 function alteraStatus($id) {
     $altera = "UPDATE composer.pedido SET
-    status = 3,
-    where id =$id";
+    status = 3
+    where id = $id";
     echo $altera;
     return editar($altera);
 }
@@ -73,19 +74,17 @@ function produtoPedido($pedido_id) {
 
 function devolverProduto($dados) {
     $editar = "UPDATE composer.produto SET
-    quantidade_estoque = quantidade_estoque + {$dados['quantidade']};
+    quantidade_estoque = quantidade_estoque + {$dados['quantidade']}
     where id = {$dados['produto_id']} ";
     return editar($editar);
 }
 
 function cancelarPedido($id) {
-
-    $statusPedidoCancelado = 3;
-
-    $pedido = buscarPedido($id);
-
-    $produtosPedido = produtoPedido($pedido["pedido_id"]);
-    print_r($produtosPedido);
+    $produtos = produtoPedido($id);
+    foreach ($produtos as $produto) {
+        $devolucao = devolverProduto($produto);
+    }
+    $statusPedidoCancelado = alteraStatus($id);
 }
 
 /*

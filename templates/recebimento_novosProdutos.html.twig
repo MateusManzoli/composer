@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 {% block body %}
     <form class="form-horizontal-a" method="post" action="../produto/receberProdutos.php"> 
+        {{mensagem}}
         <input type="hidden" name="produto_id" value="{{dadosProduto.id}}"/>
         <h3>Cadastrar novos produtos no estoque</h3>
         <div class="form-group-a">
