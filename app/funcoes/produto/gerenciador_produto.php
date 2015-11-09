@@ -38,7 +38,7 @@ function buscarProdutoPorPesquisa($pesquisa) {
 
 function cadastrarProduto($dados) {
     if (verificarProduto($dados['codigo'])) {
-        throw new Exception("Ja possuimos algum produto com esse codigo em nosso sistema");
+        throw new Exception("Codigo do produto encontrado em nosso sistema");
     }
     $cadastrar = "
         INSERT INTO composer.produto SET
@@ -57,7 +57,6 @@ function verificarProduto($codigo) {
 }
 
 function editarProdutoTabela($dados) {
-
     $editar = "UPDATE composer.produto SET
   codigo = '" . addslashes($dados['codigo']) . "',
   nome = '" . addslashes($dados['nome']) . "',

@@ -23,12 +23,6 @@ function cadastrarPedidoCliente($dados) {
     return inserir($cadastrar);
 }
 
-/* function verificar($id) {
-  $cliente = "select * from composer.cliente where id = '{$id}'";
-  $verificar = pesquisar($cliente);
-  return $verificar;
-  } */
-
 function PedidosCliente() {
     $buscar = "SELECT pd.*, 
     cl.nome as 'cliente_nome'
@@ -86,17 +80,3 @@ function cancelarPedido($id) {
     }
     $statusPedidoCancelado = alteraStatus($id);
 }
-
-/*
-function validarDadosCliente($dados) {
-
-    if (empty($dados['nome'])) {
-        throw new Exception('O campo nome precisa ser preenchido');
-    }
-    if (empty($dados['cpf'])) {
-        throw new Exception('O campo cpf precisa ser preenchido');
-    }
-    if (empty($dados['email'])) {
-        throw new Exception('O campo email precisa ser preenchido');
-    }
-}*/

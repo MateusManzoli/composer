@@ -1,20 +1,5 @@
 <?php
 
-function PaginaTemplatePedidoProduto() {
-    require_once '../vendor/autoload.php';
-
-    Twig_Autoloader::register();
-    $loader = new Twig_Loader_Filesystem(__DIR__ . '/../templates/pedidoProduto/');
-
-    $twig = new Twig_Environment($loader);
-
-    $pagina = 'index';
-
-    if (isset($_GET['pagina'])) {
-        $pagina = $_GET['pagina'];
-    }
-}
-
 function buscarPedidoProduto($id) {
     $buscar = "SELECT * FROM composer.pedido_produto where id = $id";
     $pedidoProduto = pesquisar($buscar);
@@ -27,7 +12,6 @@ function finalizarPedido($id) {
     where id = $id ";
     return editar($finalizar);
 }
-
 
 function buscarPedidosProdutos() {
     $buscar = "SELECT * FROM composer.pedido_produto order by pedido_id";
@@ -85,7 +69,6 @@ function validarDadosPedidoProduto($dados) {
     if (empty($dados['quantidade'])) {
         throw new Exception('O campo quantidade precisa ser preenchido');
     }
-
     if (empty($dados['preco'])) {
         throw new Exception('O campo preco precisa ser preenchido');
     }
