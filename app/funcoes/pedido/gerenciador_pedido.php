@@ -56,7 +56,6 @@ function alteraStatus($id) {
     $altera = "UPDATE composer.pedido SET
     status = 3
     where id = $id";
-    echo $altera;
     return editar($altera);
 }
 
