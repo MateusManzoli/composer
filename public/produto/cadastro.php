@@ -8,7 +8,7 @@ try {
 $retorno = "";
 if (isset($_POST['cadastrar'])) {
     cadastrarProduto($_POST);
-$retorno = "Pedido efetuado com êxito! ";
+$retorno = "Produto cadastrado com êxito! ";
 }
 } catch (Exception $e) {
 $retorno = $e->getMessage();
